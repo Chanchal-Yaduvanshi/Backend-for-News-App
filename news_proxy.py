@@ -1,6 +1,7 @@
 # news_proxy.py
 from flask import Flask, request, jsonify
 import requests
+import os
 
 app = Flask(__name__)
 API_KEY = "2d5ccda8dcaa467ca62e5b0c5aa995cf"
@@ -13,6 +14,7 @@ def get_news():
     response = requests.get(url)
     return jsonify(response.json())
 
-if __name__ == "__main__":
-    app.run(debug=True)
+if __name__ == '__main__':
+    port = int(os.environ.get("PORT", 5000))  # Get port from environment
+    app.run(host='0.0.0.0', port=port, debug=True)
 
